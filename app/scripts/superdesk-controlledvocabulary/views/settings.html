@@ -1,0 +1,101 @@
+<div sd-settings-view>
+    <div class="header">
+        <div class="container">
+            <h2 translate>Categories</h2>
+            <button class="btn btn-info pull-right" ng-click="edit({})">
+                <i class="icon-plus-sign icon-white"></i> <span translate>Add Category</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="category-table">
+            <ul class="table-header">
+                <li>
+                    <div class="row-wrapper">
+                        <div class="name">{{ 'Name' | translate }}</div>
+                        <div class="code">{{ 'Code' | translate }}</div>
+                        <div class="description">{{ 'Description' | translate }}</div>
+                    </div>
+                </li>
+            </ul>
+            <ul class="table-body">
+                <li ng-repeat="category in categories">
+                    <div class="row-wrapper">
+                        <div class="name">{{category.name}}</div>
+                        <div class="code">{{category.code}}</div>
+                        <div class="description">{{category.description}}</div>
+                    </div>
+                    <div class="action">
+                        <ul class="item-functions">
+                            <li>
+                                <button ng-click="edit(category)"><i class="icon-pencil"></i></button>
+                            </li>
+                            <li>
+                                <button ng-click="remove(category)"><i class="icon-trash"></i></button>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!--<table class="table table-striped">-->
+            <!--<thead>-->
+                <!--<tr>-->
+                    <!--<th>Name</th>-->
+                    <!--<th>Code</th>-->
+                    <!--<th>Description</th>-->
+                <!--</tr>-->
+            <!--</thead>-->
+            <!--<tbody>-->
+                <!--<tr ng-repeat="category in categories">-->
+                    <!--<td>{{category.name}}</td>-->
+                    <!--<td>{{category.code}}</td>-->
+                    <!--<td>{{category.description}}</td>-->
+                    <!--<td>-->
+                        <!--<div class="actions">-->
+                            <!--<button ng-click="edit(category)"><i class="icon-pencil"></i></button>-->
+                            <!--<button ng-click="remove(category)"><i class="icon-trash"></i></button>-->
+                        <!--</div>-->
+                    <!--</td>-->
+                <!--</tr>-->
+            <!--</tbody>-->
+        <!--</table>-->
+    </div>
+    <div sd-modal-view data-model="editCategory">
+        <div class="modal-header"> <a href="" class="close" ng-click="cancel()"><i class="icon-close-small"></i></a>
+            <h3 translate ng-show="editCategory._id">Edit Category {{ editCategory.name }}</h3>
+            <h3 translate ng-hide="editCategory._id">Add New Category</h3>
+        </div>
+
+        <div class="modal-body">
+            <form name="editForm" ng-submit="save(editCategory)">
+
+                <fieldset>
+
+                    <div class="field">
+                        <label for="category-name" translate>Category Name</label>
+                        <input type="text" id="category-name" ng-model="editCategory.name">
+                    </div>
+
+                    <div class="field">
+                        <label for="category-code" translate>Category Code</label>
+                        <input type="text" id="category-code" ng-model="editCategory.code">
+                    </div>
+
+                    <div class="field">
+                        <label for="category-description" translate>Category Description</label>
+                        <input type="text" id="category-description" ng-model="editCategory.description">
+                    </div>
+
+                </fieldset>
+
+            </form>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-default" ng-click="cancel()" translate>Cancel</button>
+            <button class="btn btn-primary" ng-click="save(editCategory)" ng-disabled="!editForm.$valid" translate>Save</button>
+        </div>
+    </div>
+</div>
