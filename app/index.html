@@ -76,7 +76,8 @@
             'superdesk.scratchpad',
             'superdesk.desks',
             'superdesk.authoring',
-            'superdesk.editor'
+            'superdesk.editor',
+            'superdesk.vocabulary'
         ];
 
         require([
@@ -87,7 +88,8 @@
             'superdesk-archive/module',
             'superdesk-ingest/module',
             'superdesk-scratchpad/module',
-            'superdesk-desks/module'
+            'superdesk-desks/module',
+            'superdesk-controlledvocabulary/module'
         ], function(bootstrap) {
             bootstrap(config, modules);
         });
