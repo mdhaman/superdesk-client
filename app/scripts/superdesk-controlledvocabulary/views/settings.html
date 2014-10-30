@@ -39,28 +39,6 @@
                 </li>
             </ul>
         </div>
-        <!--<table class="table table-striped">-->
-            <!--<thead>-->
-                <!--<tr>-->
-                    <!--<th>Name</th>-->
-                    <!--<th>Code</th>-->
-                    <!--<th>Description</th>-->
-                <!--</tr>-->
-            <!--</thead>-->
-            <!--<tbody>-->
-                <!--<tr ng-repeat="category in categories">-->
-                    <!--<td>{{category.name}}</td>-->
-                    <!--<td>{{category.code}}</td>-->
-                    <!--<td>{{category.description}}</td>-->
-                    <!--<td>-->
-                        <!--<div class="actions">-->
-                            <!--<button ng-click="edit(category)"><i class="icon-pencil"></i></button>-->
-                            <!--<button ng-click="remove(category)"><i class="icon-trash"></i></button>-->
-                        <!--</div>-->
-                    <!--</td>-->
-                <!--</tr>-->
-            <!--</tbody>-->
-        <!--</table>-->
     </div>
     <div sd-modal-view data-model="editCategory">
         <div class="modal-header"> <a href="" class="close" ng-click="cancel()"><i class="icon-close-small"></i></a>
@@ -70,26 +48,40 @@
 
         <div class="modal-body">
             <form name="editForm" ng-submit="save(editCategory)">
-
                 <fieldset>
-
                     <div class="field">
                         <label for="category-name" translate>Category Name</label>
-                        <input type="text" id="category-name" ng-model="editCategory.name">
+                        <input type="text" id="category-name" name="category_name" ng-model="editCategory.name"
+                               required data-unique-field="name" data-exclude="editCategory" sd-category-unique>
+                        <i ng-show="editForm.category_name.$error.required" class="required-asteriks">*</i>
+                        <div ng-show="editForm.category_name.$error.unique">
+                            <i class="icon-info-sign-warning"></i>
+                            <span translate>Sorry, a category with this code already exists.</span>
+                        </div>
                     </div>
 
                     <div class="field">
                         <label for="category-code" translate>Category Code</label>
-                        <input type="text" id="category-code" ng-model="editCategory.code">
+                        <input type="text" id="category-code" name="category_code" ng-model="editCategory.code"
+                               required ng-pattern="/^[a-zA-Z]{1}$/"
+                               data-unique-field="code" data-exclude="editCategory"
+                               sd-category-unique>
+                        <i ng-show="editForm.category_code.$error.pattern">*</i>
+                        <div ng-show="editForm.category_code.$error.pattern">
+                            <i class="icon-info-sign-warning"></i>
+                            <span translate>Please use only letters (a-zA-Z). Only one character allowed.</span>
+                        </div>
+                        <div ng-show="editForm.category_code.$error.unique">
+                            <i class="icon-info-sign-warning"></i>
+                            <span translate>Sorry, a category with this code already exists.</span>
+                        </div>
                     </div>
 
                     <div class="field">
                         <label for="category-description" translate>Category Description</label>
-                        <input type="text" id="category-description" ng-model="editCategory.description">
+                        <input type="text" id="category-description" name="category_description" ng-model="editCategory.description">
                     </div>
-
                 </fieldset>
-
             </form>
         </div>
 

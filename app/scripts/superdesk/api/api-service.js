@@ -135,9 +135,11 @@ define([
              * Query resource
              */
             Resource.prototype.query = function(params) {
+                var resUrl = this.url();
+                console.log(params);
                 return http({
                     method: 'GET',
-                    url: this.url(),
+                    url: resUrl,
                     params: params
                 });
             };
